@@ -10,7 +10,11 @@ All implementation links below are pinned to the extraction baseline,
 is retained in NOTICE. The application and its scripts are maintained in
 Status Trio, not copied into this skill package.
 
-## When an application needs changes
+## Source-project integration context
+
+The following choices, test commands, and control coverage belong to
+Status Trio. They illustrate one project's background integration and are
+not a testing methodology or acceptance suite imposed by this skill.
 
 | Existing capability | Integration needed |
 | --- | --- |
@@ -21,6 +25,17 @@ Status Trio, not copied into this skill package.
 Saved screenshots and source inspection need no live app mode. A Debug
 background mode is one implementation strategy, not a requirement imposed
 on every application by this skill.
+
+Assess each project's stack and packaging before choosing an approach; use
+the [integration decision guide](../skills/background-ui-testing/references/project-adapter.md).
+Status Trio's file layout, controller changes, and Debug guards are examples,
+not a required integration pattern or proof that all test support is absent
+from its production artifact. Removal and production isolation need their
+own project-specific checks.
+Likewise, its branch-derived Bundle ID, preference domain, custom launcher,
+external observer, and control/navigation/screenshot sequence serve that
+project's tested routes; other projects may use different identity, lifecycle,
+and evidence mechanisms.
 
 ## App-side implementation
 

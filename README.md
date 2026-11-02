@@ -7,7 +7,12 @@ someone continues using the same computer. It guides an agent to preserve the
 user's foreground app, input focus, pointer, and workspace, and to stop when
 its tools cannot do that.
 
-The skill is a procedure, not a desktop driver or a separate input session.
+The skill governs background execution of the project's CU tests.
+The project, its agent, and tools choose the tests, steps, assertions,
+functional acceptance, and report format. A prewritten suite is not required;
+the skill adds no testing-method requirements.
+
+It is not a desktop driver or a separate input session.
 It supplies no Computer Use provider, permissions, or universal background
 launcher. A second display alone does not isolate input.
 
@@ -38,42 +43,55 @@ metadata, license, and attribution. Install the whole directory, not just
 ## Use
 
 ```text
-Use $background-ui-testing to inspect my app without disrupting my work.
-Use the project's isolated test instance. Report functional behavior and
-background interference separately, with evidence and cleanup status.
+Use $background-ui-testing to run this project's CU test plan without
+disrupting my work. Keep its tests, steps, assertions, and report conventions.
+Assess the execution route, observe interference, and explain any unsupported
+operations and cleanup.
 ```
 
-For read-only work, the skill forbids changing settings merely to prove
-interaction. Source inspection and saved screenshots can remain file-only.
-If no capable provider is exposed, affected live actions are BLOCKED; safe,
-authorized non-GUI work can continue.
+For read-only work, do not add mutations as capability probes. File-only work
+needs no live attachment. If a supplied operation cannot run in the background,
+report the limitation; do not invent replacement tests.
 
 The procedure checks target ownership and tool capabilities, starts bounded
-observation, exercises only authorized operations, and restores only state
+observation, runs the existing authorized workload, and restores only state
 still owned by the run. It does not permit activate-and-restore workarounds,
 global input, or silent overwrites of concurrent user changes.
+
+Use the project's or test tool's existing reporting format and terminology.
+Add background-interference evidence, limitations, and cleanup where needed,
+without redefining functional results or introducing a report schema.
 
 ## Adopt in a project
 
 Read the [project integration guide](skills/background-ui-testing/references/project-adapter.md)
 and the [adapter example](examples/project-adapter.md). The project owns its
-launch command, development identity, provider restrictions, diagnostics,
-known activating controls, and cleanup procedures.
+test-target identity and state separation, launch or connection route, tool
+restrictions, observations, known activating controls, and cleanup procedures.
 
 Projects can choose to make background testing their default for live UI
 work. Installing this skill alone does not establish that policy. Start with
 an adapter to an existing supported test route; do not invent app flags.
 
+Connect the existing workload to a supported background route. Do not add
+toggle/navigation/screenshot checks to qualify for this skill. Existing
+harness observations may be sufficient; no new observer, launcher, or
+development build is mandatory. Cleanup follows ownership, such as closing
+a test context while preserving a shared browser process.
+
 ### Does the application need code changes?
 
-Not always. If an existing app and provider already support instance-scoped
-background interaction, connect their supported launch and observation routes.
-File-only inspection needs no live app integration.
+Not always. Use existing support first. If adaptation advice is requested,
+assess the actual stack and available automation/build routes before
+suggesting low-impact, removable options. The developer and their agent
+decide whether and how to implement them. No plugin, helper, file count,
+or per-window change is required.
 
-If the app activates itself when opening Settings, recovering permissions,
-or handling attachment, an authorized app change may be needed. An opt-in
-development mode can separate presentation from activation while preserving
-normal behavior. It cannot make a provider that uses global input safe.
+Application implementation, production isolation, and release verification
+belong to the project. This skill does not initiate those engineering tasks
+or prescribe a verification suite. It stops unsupported background operations
+and describes assessed fallback options; foreground or isolated-session
+fallback requires applicable authorization.
 
 See the [Status Trio macOS implementation example](examples/status-trio.md)
 for the actual code changes, source links, launch contract, checks, and
@@ -100,7 +118,12 @@ platforms, text entry, menus, permissions, or every control.
 
 Repository validation checks packaging and references. The
 [decision scenarios](evals/scenarios.yaml) assess agent decisions without
-operating a live UI; they do not establish runtime non-interference.
+operating a live UI; they concern the skill's execution boundaries, not an
+application's test design, and do not establish runtime non-interference.
+Earlier assessment records describe the scope at that time. The
+[prior scenario snapshot](evals/scenarios-before-execution-scope-2026-11-02.yaml)
+preserves the definitions before the execution-only scope correction; those
+historical criteria are not requirements of the current skill.
 
 ## Validate and contribute
 

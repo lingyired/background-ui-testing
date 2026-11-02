@@ -3,6 +3,13 @@
 Keep the core contract independent of a product, machine, and provider.
 Project launch commands and exceptions belong in project adapters. New
 guidance should address a demonstrated decision failure or capability gap.
+Evaluate this skill's execution boundaries, not an application's test design.
+Fixture tasks may supply project-specific tests as inputs; scoring must not
+turn their steps, assertions, or functional acceptance into universal rules.
+Earlier assessments may describe a broader, superseded scope. Their fixture
+definitions are preserved in
+`evals/scenarios-before-execution-scope-2026-11-02.yaml`; do not treat those
+historical answers or criteria as requirements of the current skill.
 
 ## Before opening a pull request
 
@@ -25,12 +32,14 @@ or simulated decision as runtime compatibility evidence.
 
 State the app/build, OS, provider/version, exposed interfaces, attachment
 route, displays, exact actions, observation window, resolution, blind spots,
-and cleanup result. Separate functionality from each interference dimension.
+and cleanup result. Keep project-reported functional results separate from
+interference conclusions.
 Mark unsupported and untested routes explicitly. Do not generalize a button
 test to text input, menus, shortcuts, permissions, or other apps.
 
-Live checks need a supported isolated test instance and a capability gate
-before launch/attachment/input. Do not collect evidence by disrupting an
+Live checks need an authorized test target and an assessed background route
+before launch/attachment/input. Do not add functional probe tests to collect
+interference evidence, or disrupt an
 active user's session. Use an explicitly authorized isolated calibration
 when the provider's behavior is unknown.
 
