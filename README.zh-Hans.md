@@ -36,6 +36,14 @@ npx skills add lingyired/background-ui-testing --skill background-ui-testing
 
 项目可以自行选择“所有真实 UI 测试默认走后台流程”；安装技能本身不会建立这条项目策略，也不会为应用增加新的启动参数。
 
+### 是否需要修改应用代码？
+
+不一定。如果应用和 provider 已支持实例定向的后台操作，接入现有启动与观察流程即可；只检查源文件或已有截图，也不需要改应用。
+
+如果打开设置、权限恢复或工具 attachment 会使应用主动激活，则可能需要在已授权的开发范围内增加仅供开发使用的后台模式，将窗口展示与激活分开，并保留正常运行行为。只改应用无法让依赖全局键鼠输入的工具安全地进行后台操作。
+
+[Status Trio macOS 实现示例](examples/status-trio.md)列出了实际改动、固定版本源码、启动约束、验证命令和已知限制。应用实现和专属脚本仍由 Status Trio 仓库维护。
+
 使用[证据与清理说明](skills/background-ui-testing/references/evidence-and-cleanup.md)及[示例报告](examples/run-report.md)，分别记录前台激活、输入焦点、指针、工作区和状态恢复。未观测的维度不能宣称通过。
 
 ## 支持范围
@@ -43,12 +51,12 @@ npx skills add lingyired/background-ui-testing --skill background-ui-testing
 | 范围 | 当前内容 |
 | --- | --- |
 | 通用流程 | 不绑定 provider 的能力检查、执行与停止条件 |
-| macOS | 平台调查指南；链接到来源项目的局部验证证据 |
+| macOS | 平台指南与 Status Trio 实现示例，包含固定版本源码链接 |
 | 浏览器 | profile/context、焦点、剪贴板和系统对话框的边界 |
 | Windows / Linux 桌面 | 仅有通用规则；尚无平台适配与真实运行验收 |
 | 具体 provider | 必须按本次实例和操作验证，不提供整体兼容承诺 |
 
-技能源自 [Status Trio](https://github.com/lingyired/status-trio)。[来源项目说明](examples/status-trio.md)中的证据只覆盖特定应用、工具和控件，不推广为其他环境的验收结论。
+技能源自 [Status Trio](https://github.com/lingyired/status-trio)。[macOS 实现示例](examples/status-trio.md)中的证据只覆盖特定应用、工具和控件，不推广为其他环境的验收结论。
 
 ## 验证与贡献
 

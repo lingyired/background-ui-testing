@@ -64,6 +64,21 @@ Projects can choose to make background testing their default for live UI
 work. Installing this skill alone does not establish that policy. Start with
 an adapter to an existing supported test route; do not invent app flags.
 
+### Does the application need code changes?
+
+Not always. If an existing app and provider already support instance-scoped
+background interaction, connect their supported launch and observation routes.
+File-only inspection needs no live app integration.
+
+If the app activates itself when opening Settings, recovering permissions,
+or handling attachment, an authorized app change may be needed. An opt-in
+development mode can separate presentation from activation while preserving
+normal behavior. It cannot make a provider that uses global input safe.
+
+See the [Status Trio macOS implementation example](examples/status-trio.md)
+for the actual code changes, source links, launch contract, checks, and
+remaining limitations. Its app code and scripts live in the source project.
+
 Use the [evidence and cleanup guide](skills/background-ui-testing/references/evidence-and-cleanup.md)
 and [illustrative run report](examples/run-report.md) to keep observations,
 functional results, interference results, and restoration conflicts separate.
@@ -73,13 +88,13 @@ functional results, interference results, and restoration conflicts separate.
 | Area | What this repository provides |
 | --- | --- |
 | Core contract | Provider-neutral procedure and explicit stop conditions |
-| macOS | Platform investigation guide; project evidence linked below |
+| macOS | Platform guide and a Status Trio implementation example with source links |
 | Browser automation | Context, storage, focus, clipboard, and dialog boundaries |
 | Windows and Linux desktops | General contract only; no platform adapters or live verification here |
 | Particular providers | Capability checks, not a blanket compatibility endorsement |
 
 This skill originated in [Status Trio](https://github.com/lingyired/status-trio).
-Its [project-specific observations](examples/status-trio.md) cover selected
+Its [macOS implementation example](examples/status-trio.md) covers selected
 macOS controls under a specific harness. They do not prove other providers,
 platforms, text entry, menus, permissions, or every control.
 
